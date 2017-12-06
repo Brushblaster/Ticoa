@@ -3,11 +3,20 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
+import VueSocketIo from 'vue-socket.io'
 
 import App from './App'
 import router from './router'
 
-Vue.use(Vuetify)
+// const SocketInstance = io('http://localhost:8081')
+
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#2196F3'
+  }
+})
+Vue.use(VueSocketIo, 'http://localhost:8081')
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
