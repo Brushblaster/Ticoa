@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import Register from '@/components/Register'
+import Home from '@/components/pages/Home'
+import Register from '@/components/pages/Register'
+import Resources from '@/components/pages/Resources'
+import Manual from '@/components/pages/Manual'
 
 Vue.use(Router)
 
@@ -9,13 +11,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'Home',
+      component: Home
     },
     {
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/resources',
+      name: 'resources',
+      component: Resources
+    },
+    {
+      path: '/manual',
+      name: 'manual',
+      component: Manual
     }
   ],
   mode: 'history'

@@ -2,8 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import { store } from './store'
+// import { sync } from 'vuex-router-sync'
+import 'vue-material-design-icons/styles.css'
+// import Android from 'icons/android'
 import 'vuetify/dist/vuetify.css'
-import VueSocketIo from 'vue-socket.io'
+// import VueSocketIo from 'vue-socket.io'
 
 import App from './App'
 import router from './router'
@@ -12,10 +16,12 @@ import router from './router'
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#2196F3'
+    // primary: '#2196F3'
+    primary: '#1B2030'
+    // secondary: '#3C4561'
   }
 })
-Vue.use(VueSocketIo, 'http://localhost:8081')
+// Vue.use(VueSocketIo, 'http://localhost:8081')
 
 Vue.config.productionTip = false
 
@@ -23,6 +29,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

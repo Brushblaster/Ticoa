@@ -21,6 +21,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      'icons': path.resolve(__dirname, 'node_modules/vue-material-design-icons'),
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src')
     }
