@@ -10,10 +10,38 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
+let getUser = require('./lib/getUser')
+let loginUser = require('./lib/loginUser')
+let createUser = require('./lib/createUser')
+let authenticateUser = require('./lib/authenticateUser')
+
+global.userSessions = {}
+
 io.on('connection', function (socket) {
-  socket.emit('news', {hello: 'world'})
-  socket.on('my other event', function (data) {
-    console.log(data)
+  socket.emit('message', {hello: 'world'})
+
+  console.log('Frontend has Connected')
+
+  // Get authenticated user
+  socket.on('userGet', function (token) {
+    getUser(socket, token)
+  })
+
+  // Create new user
+  socket.on('userCreate', function (data) {
+    console.log('user create recieved ' + data.password + ' ' + data.email)
+    createUser(socket, data)
+  })
+
+  // Login
+  socket.on('userLogin', function (data) {
+    console.log('user Login recieved ' + data.password + ' ' + data.email)
+    authenticateUser(socket, data)
+  })
+
+  // Log the authenticated user out
+  socket.on('userLogout', function (token) {
+    delete global.userSessions[token]
   })
 })
 

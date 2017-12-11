@@ -2,7 +2,7 @@
   <v-app dark class="blue-grey darken-2">
     <Layout/>
     <v-footer fixed app color="blue-grey lighten-1">
-      <span>&copy; D.Käch</span>
+      <span>&copy; 2017 | D.Käch</span>
     </v-footer>
   </v-app>
 </template>
@@ -33,7 +33,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+  @import './stylus/main.styl'
+
 /*
   .application--dark {
     background-color: #3C4561;

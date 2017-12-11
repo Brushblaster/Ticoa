@@ -4,15 +4,13 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import { store } from './store'
 // import { sync } from 'vuex-router-sync'
-import 'vue-material-design-icons/styles.css'
-// import Android from 'icons/android'
 import 'vuetify/dist/vuetify.css'
-// import VueSocketIo from 'vue-socket.io'
-
+import VueSocketio from 'vue-socket.io'
+import 'material-design-icons/iconfont/material-icons.css'
 import App from './App'
 import router from './router'
 
-// const SocketInstance = io('http://localhost:8081')
+// const io = io('http://localhost:8081')
 
 Vue.use(Vuetify, {
   theme: {
@@ -21,9 +19,12 @@ Vue.use(Vuetify, {
     // secondary: '#3C4561'
   }
 })
-// Vue.use(VueSocketIo, 'http://localhost:8081')
+
+Vue.use(VueSocketio, 'http://localhost:8081', store)
 
 Vue.config.productionTip = false
+
+// console.log(this.$store.state.connect)
 
 /* eslint-disable no-new */
 new Vue({

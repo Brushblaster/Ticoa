@@ -2,6 +2,10 @@
   <div class="hello">
       <img src="../../../static/img/v.png">
       <h1>Welcome to Ticoa</h1>
+      <!--<v-parallax src="../../../static/img/s7-1500_standard_cpus.jpg"></v-parallax>-->
+      <v-content text-align-center>
+        <h1>Totally integraded Control App</h1>
+      </v-content>
   </div>
 </template>
 
