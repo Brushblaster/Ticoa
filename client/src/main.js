@@ -5,12 +5,9 @@ import Vuetify from 'vuetify'
 import { store } from './store'
 // import { sync } from 'vuex-router-sync'
 import 'vuetify/dist/vuetify.css'
-import VueSocketio from 'vue-socket.io'
 import 'material-design-icons/iconfont/material-icons.css'
 import App from './App'
 import router from './router'
-
-// const io = io('http://localhost:8081')
 
 Vue.use(Vuetify, {
   theme: {
@@ -19,8 +16,6 @@ Vue.use(Vuetify, {
     // secondary: '#3C4561'
   }
 })
-
-Vue.use(VueSocketio, 'http://localhost:8081', store)
 
 Vue.config.productionTip = false
 

@@ -38,6 +38,9 @@
         <router-link to="/" tag="span" style="cursor: pointer">Ticoa</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn icon @click="login">
+        <v-icon v-html="authenticated ? 'lock_open' : 'lock'"></v-icon>
+      </v-btn>
       <v-btn icon @click.native.stop="options =! options">
         <v-icon>more_vert</v-icon>
       </v-btn>
@@ -51,8 +54,17 @@
 </template>
 
 <script>
+import AuthService from '../../utils/AuthService'
+
+const auth = new AuthService()
+
+const { login, logout, authenticated, authNotifier } = auth
+
 export default {
   data () {
+    authNotifier.on('authChange', authState => {
+      this.authenticated = authState.authenticated
+    })
     return {
       clipped: false,
       Sidebar: false,
@@ -62,12 +74,16 @@ export default {
         { icon: 'home', title: 'Home', path: '/home' },
         { icon: 'web', title: 'Resources', path: '/resources' },
         { icon: 'web', title: 'Manual', path: '/manual' },
-        { icon: 'input', title: 'Sign In', path: '/signin' },
-        { icon: 'details', title: 'Sign Up', path: '/signup' },
         { icon: 'device_hub', title: 'Admin', path: '/admin' }
       ],
-      miniVariant: false
+      miniVariant: false,
+      auth,
+      authenticated
     }
+  },
+  methods: {
+    login,
+    logout
   }
 }
 

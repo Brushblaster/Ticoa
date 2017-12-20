@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/pages/Home'
-import Signin from '@/components/pages/Signin'
-import Signup from '@/components/pages/Signup'
 import Resources from '@/components/pages/Resources'
 import Manual from '@/components/pages/Manual'
 import Admin from '@/components/pages/Admin'
@@ -23,16 +21,6 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/signin',
-      name: 'Signin',
-      component: Signin
-    },
-    {
-      path: '/signup',
-      name: 'Signup',
-      component: Signup
     },
 
     {
