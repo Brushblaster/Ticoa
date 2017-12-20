@@ -36,6 +36,7 @@ export default class AuthService {
 
   setSession (authResult) {
     // Set the time that the access token will expire at
+    console.log(authResult)
     let expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
     )
@@ -54,13 +55,14 @@ export default class AuthService {
     this.authNotifier.emit('authChange', false)
     // navigate to the home route
     router.replace('home')
+    console.log('logged out')
   }
 
   isAuthenticated () {
     // Check whether the current time is past the
     // access token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
-    return new Date().getTime() < expiresAt
+    return console.log(new Date().getTime() < (expiresAt - 35990))
   }
   login () {
     this.auth0.authorize()

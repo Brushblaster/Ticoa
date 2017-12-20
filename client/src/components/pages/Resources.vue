@@ -8,13 +8,11 @@
     <v-card>
       <v-card-text>
         <v-slider
-        v-model="value1"
         min="0"
         max="300"
         step="0"
         ></v-slider>
         <v-slider
-        v-model="value2"
         step="0"
         min="0"
         max="300"
@@ -26,9 +24,13 @@
 
 <script>
 // import VueCharts from 'vue-chartjs'
+import auth from '../../utils/AuthService'
 
 export default {
+  name: 'resources',
+  porps: [ auth ],
   data () {
+    this.auth.isAuthenticated()
     return {
       value1: 0,
       value2: 0

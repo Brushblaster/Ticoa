@@ -39,22 +39,27 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click="login">
-        <v-icon v-html="authenticated ? 'lock_open' : 'lock'"></v-icon>
+        <v-icon v-html="auth.isAuthenticated ? 'lock_open' : 'lock'"></v-icon>
+      </v-btn>
+      <v-btn icon @click="logout">
+        <v-icon v-html="auth.isAuthenticated ? 'lock' : 'lock_open'"></v-icon>
       </v-btn>
       <v-btn icon @click.native.stop="options =! options">
         <v-icon>more_vert</v-icon>
       </v-btn>
     </v-toolbar>
     <v-content>
-      <router-view>
+      <router-view >
         <v-container fluid></v-container>
       </router-view>
+      <!-- <loading v-else /> -->
     </v-content>
   </div>
 </template>
 
 <script>
 import AuthService from '../../utils/AuthService'
+import Loading from '../layouts/Loading'
 
 const auth = new AuthService()
 
@@ -84,6 +89,9 @@ export default {
   methods: {
     login,
     logout
+  },
+  components: {
+    Loading
   }
 }
 
