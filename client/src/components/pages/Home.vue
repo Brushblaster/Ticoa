@@ -5,19 +5,34 @@
       <!--<v-parallax src="../../../static/img/s7-1500_standard_cpus.jpg"></v-parallax>-->
       <v-content text-align-center>
         <h1>Totally integraded Control App</h1>
+        <v-btn @click="check">check</v-btn>
       </v-content>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Home',
-    data () {
-      return {
-        msg: 'Hi'
-      }
+import { mapGetters } from 'vuex'
+
+export default {
+  name: 'Home',
+  data () {
+    return {
+      msg: 'Hi'
     }
+  },
+  methods: {
+    check () {
+      let authcheck
+      authcheck = this.isAuthenticated
+      console.log('authcheck: ' + authcheck)
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'isAuthenticated'
+    ])
   }
+}
 </script>
 
 <style scoped>

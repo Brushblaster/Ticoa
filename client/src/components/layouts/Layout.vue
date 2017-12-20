@@ -27,34 +27,37 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar fixed app dark class="primary" :clipped-left="clipped">
-      <v-toolbar-side-icon @click.native.stop="Sidebar = !Sidebar"></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click.stop="Sidebar = !Sidebar"></v-toolbar-side-icon>
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
       </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>remove</v-icon>
-      </v-btn>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">Ticoa</router-link>
+        <router-link to="/home" tag="span" style="cursor: pointer">Ticoa</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon @click="login">
-        <v-icon v-html="authenticated ? 'lock_open' : 'lock'"></v-icon>
+      <v-btn icon @click.stop="login" v-show="!this.isAuthenticated">
+        <v-icon v-html="this.isAuthenticated ? 'lock' : 'lock_open'"></v-icon>
       </v-btn>
-      <v-btn icon @click.native.stop="options =! options">
+      <v-btn icon @click.stop="logout" v-show="this.isAuthenticated">
+        <v-icon v-html="this.isAuthenticated ? 'lock' : 'lock_open'"></v-icon>
+      </v-btn>
+      <v-btn icon @click.stop="options =! options">
         <v-icon>more_vert</v-icon>
       </v-btn>
     </v-toolbar>
     <v-content>
-      <router-view>
+      <router-view >
         <v-container fluid></v-container>
       </router-view>
+      <!-- <loading v-else /> -->
     </v-content>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AuthService from '../../utils/AuthService'
+import Loading from '../layouts/Loading'
 
 const auth = new AuthService()
 
@@ -64,7 +67,18 @@ export default {
   data () {
     authNotifier.on('authChange', authState => {
       this.authenticated = authState.authenticated
+      console.log(authState.authenticated)
+      if (authState.authenticated === true) {
+        this.$store.dispatch('isAuthenticated', {
+          auth: true
+        })
+      } else {
+        this.$store.dispatch('isAuthenticated', {
+          auth: false
+        })
+      }
     })
+
     return {
       clipped: false,
       Sidebar: false,
@@ -83,7 +97,22 @@ export default {
   },
   methods: {
     login,
-    logout
+    logout,
+    test () {
+      authNotifier.emit('authChange', { authenticated: true })
+      console.log(authenticated)
+    },
+    test2 () {
+      console.log(this.authenticated)
+    }
+  },
+  components: {
+    Loading
+  },
+  computed: {
+    ...mapGetters([
+      'isAuthenticated'
+    ])
   }
 }
 

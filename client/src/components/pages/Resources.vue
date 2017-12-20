@@ -8,13 +8,11 @@
     <v-card>
       <v-card-text>
         <v-slider
-        v-model="value1"
         min="0"
         max="300"
         step="0"
         ></v-slider>
         <v-slider
-        v-model="value2"
         step="0"
         min="0"
         max="300"
@@ -28,6 +26,7 @@
 // import VueCharts from 'vue-chartjs'
 
 export default {
+  name: 'Resources',
   data () {
     return {
       value1: 0,

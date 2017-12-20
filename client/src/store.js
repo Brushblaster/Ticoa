@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import auth from './vuex/modules/auth/store'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
+  modules: {
+    auth
+  },
   state: {
     isConnected: false,
     authenticated: false,
