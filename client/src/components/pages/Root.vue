@@ -24,11 +24,19 @@
           <small>Totally integrated control app</small>
         </v-flex>
       </v-layout>
+              <v-alert
+        color="error"
+        icon="priority_high"
+        :value="this.loginAlert"
+        transition="scale-transition">
+        You need to Logi in !
+        </v-alert>
       <!--<v-parallax src="../../../static/img/s7-1500_standard_cpus.jpg"></v-parallax>-->
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AuthService from '../../utils/AuthService'
 
 const auth = new AuthService()
@@ -54,12 +62,18 @@ export default {
 
     return {
       auth,
-      authenticated
+      authenticated,
+      alert: true
     }
   },
   methods: {
     login,
     logout
+  },
+  computed: {
+    ...mapGetters([
+      'loginAlert'
+    ])
   }
 }
 </script>

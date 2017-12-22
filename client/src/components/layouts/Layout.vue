@@ -16,6 +16,7 @@
           :key="item.title"
           router
           :to="item.path"
+          :disabled="this.isAuthenticated"
         >
           <v-list-tile-action>
             <v-icon v-html="item.icon"></v-icon>
@@ -85,10 +86,10 @@ export default {
       fixed: false,
       options: false,
       Sidebarlinks: [
-        { icon: 'home', title: 'Home', path: '/home' },
-        { icon: 'web', title: 'Resources', path: '/resources' },
-        { icon: 'web', title: 'Manual', path: '/manual' },
-        { icon: 'device_hub', title: 'Admin', path: '/admin' }
+        { icon: 'home', title: 'Home', path: '/home', disabled: !this.isAuthenticated },
+        { icon: 'web', title: 'Resources', path: '/resources', disabled: !this.isAuthenticated },
+        { icon: 'web', title: 'Manual', path: '/manual', disabled: !this.isAuthenticated },
+        { icon: 'device_hub', title: 'Admin', path: '/admin', disabled: !this.isAuthenticated }
       ],
       miniVariant: false,
       auth,

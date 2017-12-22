@@ -29,7 +29,6 @@ import auth from '../../utils/AuthService'
 export default {
   name: 'Resources',
   data () {
-    this.auth.isAuthenticated()
     return {
       value1: 0,
       value2: 0

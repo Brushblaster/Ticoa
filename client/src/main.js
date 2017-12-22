@@ -23,11 +23,17 @@ router.beforeEach((to, from, next) => {
      // if not, redirect to login page.
     if (!store.getters.isAuthenticated) {
       console.log('please login first !')
+      store.dispatch('getLoginAlert', {
+        setOn: true
+      })
       next({
         path: '/',
         query: { redirect: to.fullPath }
       })
     } else {
+      store.dispatch('getLoginAlert', {
+        setOn: false
+      })
       next()
     }
   } else {

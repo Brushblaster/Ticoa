@@ -2,11 +2,15 @@ import router from '../../../router'
 
 export default {
   state: {
-    isAuthenticated: false
+    isAuthenticated: false,
+    loginAlert: false
   },
   getters: {
     isAuthenticated: state => {
       return state.isAuthenticated
+    },
+    loginAlert: state => {
+      return state.loginAlert
     }
   },
   mutations: {
@@ -19,6 +23,14 @@ export default {
       } else {
         state.isAuthenticated = false
         console.log('Authentication is void')
+      }
+    },
+    getLoginAlert: (state, acc) => {
+      console.log('alert: ' + acc.Seton)
+      if (acc.setOn === true) {
+        state.loginAlert = true
+      } else {
+        state.loginAlert = false
       }
     }
   },
@@ -36,6 +48,18 @@ export default {
           commit('isAuthenticated', {
             payload: false
           })
+        })
+      }
+    },
+    getLoginAlert: ({ commit }, acc) => {
+      console.log('actionAlert: ' + alert)
+      if (acc.setOn === true) {
+        commit('getLoginAlert', {
+          setOn: true
+        })
+      } else {
+        commit('getLoginAlert', {
+          setOn: false
         })
       }
     }
