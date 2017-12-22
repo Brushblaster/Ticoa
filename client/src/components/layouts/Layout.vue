@@ -35,19 +35,11 @@
         <router-link to="/home" tag="span" style="cursor: pointer">Ticoa</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-<<<<<<< HEAD
       <v-btn icon @click.stop="login" v-show="!this.isAuthenticated">
         <v-icon v-html="this.isAuthenticated ? 'lock' : 'lock_open'"></v-icon>
       </v-btn>
       <v-btn icon @click.stop="logout" v-show="this.isAuthenticated">
         <v-icon v-html="this.isAuthenticated ? 'lock' : 'lock_open'"></v-icon>
-=======
-      <v-btn icon @click="login">
-        <v-icon v-html="auth.isAuthenticated ? 'lock_open' : 'lock'"></v-icon>
-      </v-btn>
-      <v-btn icon @click="logout">
-        <v-icon v-html="auth.isAuthenticated ? 'lock' : 'lock_open'"></v-icon>
->>>>>>> 04a161a6002713fb6c0b984870dd96e200093b96
       </v-btn>
       <v-btn icon @click.stop="options =! options">
         <v-icon>more_vert</v-icon>
@@ -105,7 +97,6 @@ export default {
   },
   methods: {
     login,
-<<<<<<< HEAD
     logout,
     test () {
       authNotifier.emit('authChange', { authenticated: true })
@@ -122,12 +113,6 @@ export default {
     ...mapGetters([
       'isAuthenticated'
     ])
-=======
-    logout
-  },
-  components: {
-    Loading
->>>>>>> 04a161a6002713fb6c0b984870dd96e200093b96
   }
 }
 
