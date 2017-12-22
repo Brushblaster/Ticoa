@@ -68,7 +68,6 @@ export default {
   data () {
     authNotifier.on('authChange', authState => {
       this.authenticated = authState.authenticated
-      console.log(authState.authenticated)
       if (authState.authenticated === true) {
         this.$store.dispatch('isAuthenticated', {
           auth: true

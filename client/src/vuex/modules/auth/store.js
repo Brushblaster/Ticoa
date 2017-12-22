@@ -15,18 +15,16 @@ export default {
   },
   mutations: {
     isAuthenticated (state, valid) {
-      console.log('payload: ' + valid.payload)
       if (valid.payload === true) {
         state.isAuthenticated = true
-        console.log('Autehntication is valid !')
+        console.log('Autehnticatied...!')
         router.push('/home')
       } else {
         state.isAuthenticated = false
-        console.log('Authentication is void')
+        console.log('Authentication is invalid !')
       }
     },
     getLoginAlert: (state, acc) => {
-      console.log('alert: ' + acc.Seton)
       if (acc.setOn === true) {
         state.loginAlert = true
       } else {
@@ -36,7 +34,6 @@ export default {
   },
   actions: {
     isAuthenticated ({ commit, state }, auth) {
-      console.log('auth: ' + auth.auth)
       if (auth.auth === true) {
         return new Promise((resolve, reject) => {
           commit('isAuthenticated', {
@@ -52,7 +49,6 @@ export default {
       }
     },
     getLoginAlert: ({ commit }, acc) => {
-      console.log('actionAlert: ' + alert)
       if (acc.setOn === true) {
         commit('getLoginAlert', {
           setOn: true

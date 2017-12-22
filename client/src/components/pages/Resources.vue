@@ -24,7 +24,6 @@
 
 <script>
 // import VueCharts from 'vue-chartjs'
-import auth from '../../utils/AuthService'
 
 export default {
   name: 'Resources',
