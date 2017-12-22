@@ -8,11 +8,7 @@ import SPS from '@/components/pages/SPS'
 import Input from '@/components/pages/Input'
 import Output from '@/components/pages/Output'
 import Config from '@/components/pages/Config'
-<<<<<<< HEAD
 import Root from '@/components/pages/Root'
-=======
-// import Auth from '@/utils/AuthService'
->>>>>>> 04a161a6002713fb6c0b984870dd96e200093b96
 
 Vue.use(Router)
 
