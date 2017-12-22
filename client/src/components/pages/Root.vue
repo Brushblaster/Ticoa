@@ -3,7 +3,7 @@
       <v-layout row justify-center>
         <v-flex xs12 sm9 md7 lg5 xl3>
           <v-card light>
-            <v-card-media src="https://avatars0.githubusercontent.com/u/22138497?s=400&v=4" height="197px" width="197px">
+            <v-card-media src="https://s3.amazonaws.com/revue/items/images/001/909/550/mail/vuetifyy.png?1492952240" height="197px" width="197px">
             </v-card-media>
             <!-- <v-card-title primary-title> -->
               <h3 class="display-1 mr-2 text-xs-center">Welcome to Ticoa</h3>

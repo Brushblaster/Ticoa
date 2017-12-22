@@ -24,10 +24,17 @@
 
 <script>
 // import VueCharts from 'vue-chartjs'
+import auth from '../../utils/AuthService'
 
 export default {
+<<<<<<< HEAD
   name: 'Resources',
+=======
+  name: 'resources',
+  porps: [ auth ],
+>>>>>>> 04a161a6002713fb6c0b984870dd96e200093b96
   data () {
+    this.auth.isAuthenticated()
     return {
       value1: 0,
       value2: 0

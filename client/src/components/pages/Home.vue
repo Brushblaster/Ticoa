@@ -11,6 +11,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { mapGetters } from 'vuex'
 
 export default {
@@ -25,6 +26,21 @@ export default {
       let authcheck
       authcheck = this.isAuthenticated
       console.log('authcheck: ' + authcheck)
+=======
+import auth from '../../utils/AuthService'
+
+  export default {
+    name: 'Home',
+    data () {
+      return {
+        msg: 'Hi'
+      }
+    },
+    methods: {
+      check () {
+        console.log(this.authenticated)
+      }
+>>>>>>> 04a161a6002713fb6c0b984870dd96e200093b96
     }
   },
   computed: {

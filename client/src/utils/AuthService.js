@@ -69,6 +69,7 @@ export default class AuthService {
   }
 
   setSession (authResult) {
+<<<<<<< HEAD
     if (authResult && authResult.accessToken && authResult.idToken) {
       // Set the time that the access token will expire at
       let expiresAt = JSON.stringify(
@@ -100,6 +101,17 @@ export default class AuthService {
       }
       cb(err, profile)
     })
+=======
+    // Set the time that the access token will expire at
+    console.log(authResult)
+    let expiresAt = JSON.stringify(
+      authResult.expiresIn * 1000 + new Date().getTime()
+    )
+    localStorage.setItem('access_token', authResult.accessToken)
+    localStorage.setItem('id_token', authResult.idToken)
+    localStorage.setItem('expires_at', expiresAt)
+    this.authNotifier.emit('authChange', { authenticated: true })
+>>>>>>> 04a161a6002713fb6c0b984870dd96e200093b96
   }
 
   logout () {
@@ -110,14 +122,19 @@ export default class AuthService {
     this.userProfile = null
     this.authNotifier.emit('authChange', false)
     // navigate to the home route
+<<<<<<< HEAD
     router.replace('/')
+=======
+    router.replace('home')
+    console.log('logged out')
+>>>>>>> 04a161a6002713fb6c0b984870dd96e200093b96
   }
 
   isAuthenticated () {
     // Check whether the current time is past the
     // access token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
-    return new Date().getTime() < expiresAt
+    return console.log(new Date().getTime() < (expiresAt - 35990))
   }
 
   getRole () {
