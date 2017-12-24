@@ -2,7 +2,7 @@ import router from '../../../router'
 
 export default {
   state: {
-    isAuthenticated: false,
+    isAuthenticated: true, // important to change
     loginAlert: false
   },
   getters: {

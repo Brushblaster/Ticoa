@@ -2,20 +2,21 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const morgan = require('morgan')
-// const mongoose = require('./models')
+// const morgan = require('morgan')
+const mongoose = require('./models')
+mongoose.Promise = global.Promise
 const config = require('./config/config')
-// const db = mongoose.connection
+const db = mongoose.connection
 const app = express()
-const server = require('http').Server(app)
+/* const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
 let getUser = require('./lib/getUser')
 let loginUser = require('./lib/loginUser')
 let createUser = require('./lib/createUser')
-let authenticateUser = require('./lib/authenticateUser')
+let authenticateUser = require('./lib/authenticateUser') */
 
-global.userSessions = {}
+/* global.userSessions = {}
 
 io.on('connection', function (socket) {
   socket.emit('message', {hello: 'world'})
@@ -43,13 +44,16 @@ io.on('connection', function (socket) {
   socket.on('userLogout', function (token) {
     delete global.userSessions[token]
   })
-})
+}) */
 
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-require('./routes')(app)
+// initialize Routes
+app.use('/api', require('./routes'))
 
-server.listen(config.port || 8081)
+// require('./routes')(app)
+
+app.listen(config.port || 8081) // server.listen(config.port || 8081)
 console.log(`Server started on port ${config.port}`)

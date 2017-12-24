@@ -1,14 +1,17 @@
 const fs = require('fs')
 const path = require('path')
 const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 const config = require('../config/config')
-const UserSchema = require('./user')
-const db = {}
+const User = require('./user')
+const CommConf = require('./config')
 
-mongoose.connect(config.dbadsress, {
-  useMongoClien: true
+mongoose.connect(config.dbAddress, {
+  useMongoClient: true
 })
+  .catch(error => console.log(error))
 
-const User = mongoose.model('User', UserSchema)
-
-module.exports = db
+module.exports = {
+  CommConf: CommConf,
+  User: User
+}

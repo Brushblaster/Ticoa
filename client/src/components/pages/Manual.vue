@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container fluid gird-list-xs>
-      <h1 class="text-xs-center">Manual Page</h1>
+      <!-- <h1 class="text-xs-center">Manual Page</h1> -->
     </v-container>
     <router-view class="Manual" name="a"></router-view>
     <div class="headline text-xs-center pa-5"></div>

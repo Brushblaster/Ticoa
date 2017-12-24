@@ -8,6 +8,7 @@ import 'vuetify/dist/vuetify.css'
 import 'material-design-icons/iconfont/material-icons.css'
 import App from './App'
 import router from './router'
+import './utils/apiCrecentials'
 
 Vue.use(Vuetify, {
   theme: {
@@ -22,7 +23,7 @@ router.beforeEach((to, from, next) => {
      // this route requires auth, check if logged in
      // if not, redirect to login page.
     if (!store.getters.isAuthenticated) {
-      console.log('please login first !')
+      console.log('please login first.!')
       store.dispatch('getLoginAlert', {
         setOn: true
       })

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 const bcrypt = require('bcryptjs')
 const Schema = mongoose.Schema
 
@@ -13,6 +14,6 @@ const UserSchema = new Schema({
   }
 })
 
-module.exports = {
-  UserSchema
-}
+const User = mongoose.model('User', UserSchema)
+
+module.exports = User
