@@ -99,6 +99,7 @@
             Load Last Config
             </v-btn>
           </v-card-actions>
+          <p>{{ this.createdOn }}</p>
         </v-card>
       </v-flex>
     </v-layout>
@@ -106,7 +107,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { store } from '../../store'
 
 export default {
@@ -125,9 +126,10 @@ export default {
           { text: 'Profinet' },
           { text: 'Modbus' }
       ],
-      netAddr: '',
-      slotNo: '',
-      rackNo: ''
+      netAddr: null,
+      slotNo: null,
+      rackNo: null,
+      createdOn: null
     }
   },
   methods: {
@@ -155,10 +157,13 @@ export default {
     getLastConfigData: () => {
       store.dispatch('getLastConfig')
       let config = store.getters.getConfig
-      console.log(this.getConfig)
+      console.log(config.netAddr)
+
       this.netAddr = config.netAddr
       this.slotNo = config.slotNo
       this.rackNo = config.rackNo
+      this.createdOn = config.createdOn
+      console.log('netAddr: ', this.netAddr)
     },
 /*     ...mapActions([
       'getLastConfig'
@@ -170,13 +175,16 @@ export default {
   },
   computed: {
     ...mapGetters([
-    'getConfig'
+      'getConfig'
     ])
   },
   beforeEnter () {
     this.netAddr = store.getters.getConfig.netAddr
     this.slotNo = store.getters.getConfig.slotNo
     this.rackNo = store.getters.getConfig.rackNo
+  },
+  beforeMount () {
+    store.dispatch('getLastConfig')
   }
 }
 </script>

@@ -1,4 +1,3 @@
-import { API } from '../../../utils/apiCrecentials'
 
 export default {
   state: {

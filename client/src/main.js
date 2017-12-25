@@ -52,5 +52,19 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  // Autologin based on existing token inside the local Storage
+  beforeMount: () => {
+    let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
+    let isAuthValid = (new Date().getTime() < (expiresAt))
+    if (isAuthValid) {
+      store.commit('isAuthenticated', {
+        auth: true
+      })
+    } else {
+      store.commit('isAuthenticated', {
+        auth: false
+      })
+    }
+  }
 })

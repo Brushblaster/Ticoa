@@ -2,7 +2,7 @@ import router from '../../../router'
 
 export default {
   state: {
-    isAuthenticated: true, // important to change
+    isAuthenticated: false,
     loginAlert: false
   },
   getters: {
@@ -14,8 +14,8 @@ export default {
     }
   },
   mutations: {
-    isAuthenticated (state, valid) {
-      if (valid.payload === true) {
+    isAuthenticated (state, auth) {
+      if (auth.auth === true) {
         state.isAuthenticated = true
         console.log('Autehnticatied...!')
         router.push('/home')
@@ -37,13 +37,13 @@ export default {
       if (auth.auth === true) {
         return new Promise((resolve, reject) => {
           commit('isAuthenticated', {
-            payload: true
+            auth: true
           })
         })
       } else {
         return new Promise((resolve, reject) => {
           commit('isAuthenticated', {
-            payload: false
+            auth: false
           })
         })
       }

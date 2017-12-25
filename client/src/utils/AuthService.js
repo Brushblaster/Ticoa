@@ -39,9 +39,13 @@ export default class AuthService {
       // audience: AUTH_CONFIG.apiUrl,
       responseType: 'token id_token',
       params: {
-        scope: 'openid profile read:messages'
+        scope: 'openid profile read:order write:order'
       },
       redirect: false
+    },
+    theme: {
+      logo: '../../static/img/v.png',
+      primaryColor: '#1B2030'
     }
   })
 
@@ -117,7 +121,7 @@ export default class AuthService {
     // Check whether the current time is past the
     // access token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
-    return console.log(new Date().getTime() < (expiresAt - 35990))
+    return console.log(new Date().getTime() < expiresAt)
   }
 
   getRole () {
