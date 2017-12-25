@@ -99,7 +99,7 @@
             Load Last Config
             </v-btn>
           </v-card-actions>
-          <p>{{ this.createdOn }}</p>
+          <p class="ml-2 caption">Timestamp of last Config: {{ this.createdOn }}</p>
         </v-card>
       </v-flex>
     </v-layout>
@@ -107,8 +107,9 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { store } from '../../store'
+const moment = require('moment')
 
 export default {
   name: 'Config',
@@ -152,22 +153,24 @@ export default {
       this.radio = false
       this.slotNo = ''
       this.rackNo = ''
+      this.createdOn = ''
       this.clearConfig()
     },
-    getLastConfigData: () => {
+    getLastConfigData () {
       store.dispatch('getLastConfig')
       let config = store.getters.getConfig
       console.log(config.netAddr)
-
       this.netAddr = config.netAddr
       this.slotNo = config.slotNo
       this.rackNo = config.rackNo
-      this.createdOn = config.createdOn
+      moment.locale('de-ch')
+      let Dat = moment(config.createdOn).format('LLLL')
+      this.createdOn = Dat
       console.log('netAddr: ', this.netAddr)
     },
-/*     ...mapActions([
+    ...mapActions([
       'getLastConfig'
-    ]), */
+    ]),
     ...mapMutations([
       'saveConfig',
       'clearConfig'

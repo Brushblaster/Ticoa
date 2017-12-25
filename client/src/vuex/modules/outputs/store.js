@@ -1,4 +1,4 @@
-
+import fetchConfig from '../../../config/fetchConfig'
 export default {
   state: {
     Q: {
@@ -21,8 +21,12 @@ export default {
     }
   },
   actions: {
-    switchOutput: () => {
-
+    switchOutput: ({ commit }) => {
+      fetch(fetchConfig.BaseURL + 'output', {
+        method: 'POST',
+        mode: fetchConfig.mode,
+        headers: fetchConfig.headers
+      })
     }
   }
 }

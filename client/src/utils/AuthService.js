@@ -46,6 +46,9 @@ export default class AuthService {
     theme: {
       logo: '../../static/img/v.png',
       primaryColor: '#1B2030'
+    },
+    languageDictionary: {
+      title: 'Ticoa'
     }
   })
 
