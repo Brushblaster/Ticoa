@@ -10,7 +10,6 @@ router.post('/', (req, res) => {
 
 // get the Config sent by the Front-End and save it to the Database
 router.post('/config', (req, res) => {
-  console.log(req.body)
   db.CommConf.create(req.body)
     .then(CommConf => {
       res.send(CommConf)
@@ -28,6 +27,16 @@ router.get('/lastconf', (req, res) => {
       res.send(CommConf[0])
     })
     .catch(error => console.log(error))
+})
+
+// get the changed output state save it to MongoDB and switch the outputs
+router.post('/output', (req, res) => {
+  console.log(req.body)
+  db.Output.create(req.body)
+    .then(Output => {
+      res.send(Output)
+    })
+    .catch(error => console.log('Model Error: ', error))
 })
 
 module.exports = router

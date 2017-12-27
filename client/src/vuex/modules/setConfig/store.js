@@ -44,7 +44,6 @@ export default {
       fetch(fetchConfig.BaseURL + 'lastconf', {
         method: 'GET',
         mode: fetchConfig.mode
-        // headers: fetchConfig.headers
       })
       .then(res => res.json())
       .then(data => {

@@ -140,9 +140,12 @@ export default {
         config: {
           netAddr: this.netAddr,
           slotNo: this.slotNo,
-          rackNo: this.rackNo
+          rackNo: this.rackNo,
+          networkType: this.networkTypeDD.text,
+          protocolType: this.protocolTypeDD
         }
       }
+      console.log(config)
       this.$store.dispatch('sendConfig', {
         config
       })
@@ -150,7 +153,7 @@ export default {
     clear () {
       this.networkTypeDD = null
       this.netAddr = ''
-      this.radio = false
+      this.protocolTypeDD = null
       this.slotNo = ''
       this.rackNo = ''
       this.createdOn = ''
@@ -160,6 +163,8 @@ export default {
       store.dispatch('getLastConfig')
       let config = store.getters.getConfig
       console.log(config.netAddr)
+      this.networkTypeDD = config.networkType
+      this.protocolTypeDD = config.protocolType
       this.netAddr = config.netAddr
       this.slotNo = config.slotNo
       this.rackNo = config.rackNo

@@ -101,7 +101,20 @@ export default {
   },
   methods: {
     outputChange () {
-      this.$store.dispatch('switchOutput')
+      let outputs = {
+        q00: this.q00,
+        q01: this.q01,
+        q02: this.q02,
+        q03: this.q03,
+        q04: this.q04,
+        q05: this.q05,
+        q06: this.q06,
+        q07: this.q07
+      }
+      console.log(outputs)
+      this.$store.dispatch('switchOutput', {
+        outputs
+      })
     }
   }
 }

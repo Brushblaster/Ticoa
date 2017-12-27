@@ -3,21 +3,6 @@ mongoose.Promise = global.Promise
 const bcrypt = require('bcryptjs')
 const Schema = mongoose.Schema
 
-/* const CommConfSchema = new Schema({
-  netAddr: {
-    type: String,
-    required: 'IP Address is required'
-  },
-  rackNo: {
-    type: String,
-    required: 'Rack Number is required'
-  },
-  slotNo: {
-    type: String,
-    required: 'Slot Number is required'
-  }
-}) */
-
 // Create Parameter Configuration Schema
 const ConfigParSchema = new Schema({
   netAddr: {
@@ -26,13 +11,23 @@ const ConfigParSchema = new Schema({
   },
   slotNo: {
     type: Number,
-    default: 2,
+    default: 1,
     required: [true, 'Slot Number is required']
   },
   rackNo: {
     type: Number,
-    default: 1,
+    default: 0,
     required: [true, 'Rack Number is required']
+  },
+  networkType: {
+    type: String,
+    default: 'Ethernet',
+    required: [true, 'Network Type must be set']
+  },
+  protocolType: {
+    type: String,
+    default: 'IPv4',
+    required: [true, 'Network Protocol must be supplied']
   },
   _id: false
 })

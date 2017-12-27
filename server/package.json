@@ -29,6 +29,7 @@
     "moment": "^2.20.1",
     "mongoose": "^4.13.5",
     "morgan": "^1.9.0",
+    "node-snap7": "^0.4.0",
     "socket.io": "^2.0.4"
   }
 }

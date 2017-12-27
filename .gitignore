@@ -4,3 +4,4 @@ client/.firebaserc
 client/firebase.json
 client/firestore.rules
 client/firestore.indexes.json
+client/firebase-debug.log
