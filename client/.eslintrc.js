@@ -24,10 +24,12 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // allow unused vars
-    'no-unused-vars': 1,
+    'no-unused-vars': 0,
     // allow regex
     'no-useless-escape': 1,
     // allow indent
-    'indent': 1
+    'indent': 1,
+    // allow padded blocks for better visability
+    'padded-blocks': 0
   }
 }

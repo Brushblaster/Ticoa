@@ -11,14 +11,8 @@ const app = express()
 
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-
+// const socket = io.conn()
 const s7 = require('./plc/connectMethod')(io)
-
-io.on('connection', function (socket) {
-  socket.emit('message', {hello: 'world'})
-
-  console.log('Frontend has Connected')
-})
 
 // app.use(morgan('combined'))
 app.use(bodyParser.json())
@@ -29,5 +23,6 @@ app.use('/api', require('./routes'))
 
 // require('./routes')(app)
 
-server.listen(config.port || 8081) // app.listen(config.port || 8081)
+server.listen(config.port || 8081)
+// app.listen(config.port || 8081)
 console.log(`Server started on port ${config.port}`)

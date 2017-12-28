@@ -22,8 +22,19 @@ export const store = new Vuex.Store({
   mutations: {
     setLoading (state, payload) {
       state.loading = payload
+    },
+    SOCKET_CONNECT: (state, status) => {
+      state.isConnected = true
+      console.log('Backend has connected...')
+    },
+    SOCKET_DISCONNECT: (state, status) => {
+      state.isConnected = false
+      console.log('Backend disconnected...')
     }
   },
   actions: {
+    socket_message: (message) => {
+      console.log('message: ', message)
+    }
   }
 })

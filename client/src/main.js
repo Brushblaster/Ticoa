@@ -3,12 +3,13 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import { store } from './store'
-// import { sync } from 'vuex-router-sync'
 import 'vuetify/dist/vuetify.css'
 import 'material-design-icons/iconfont/material-icons.css'
 import App from './App'
 import router from './router'
 import './utils/apiCrecentials'
+import VueSocketio from 'vue-socket.io'
+// import socket from 'socket.io-client'
 
 Vue.use(Vuetify, {
   theme: {
@@ -43,6 +44,8 @@ router.beforeEach((to, from, next) => {
 })
 
 Vue.config.productionTip = false
+
+Vue.use(VueSocketio, 'http://localhost:8081' && 'http://192.168.1.107:8081')
 
 // console.log(this.$store.state.connect)
 

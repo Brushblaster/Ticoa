@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bit-buffer": "^0.2.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "crypto": "^1.0.1",
@@ -29,6 +30,7 @@
     "moment": "^2.20.1",
     "mongoose": "^4.13.5",
     "morgan": "^1.9.0",
+    "node-bitarray": "^0.1.0",
     "node-snap7": "^0.4.0",
     "socket.io": "^2.0.4"
   }

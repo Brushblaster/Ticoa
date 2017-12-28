@@ -1,4 +1,5 @@
 import fetchConfig from '../../../config/fetchConfig'
+import VueSocketio from 'vue-socket.io'
 export default {
   state: {
     Output: {
@@ -29,9 +30,9 @@ export default {
     }
   },
   actions: {
-    switchOutput: ({ commit }, outputs) => {
+    switchOutput ({ commit }, outputs) {
       console.log(JSON.stringify(outputs.outputs))
-      fetch(fetchConfig.BaseURL + 'output', {
+      /* fetch(fetchConfig.BaseURL + 'output', {
         method: 'POST',
         mode: fetchConfig.mode,
         headers: fetchConfig.headers,
@@ -41,7 +42,8 @@ export default {
         .then(data => {
           commit('switchOutputState', data)
         })
-        .catch(error => console.log('Error: ', error))
+        .catch(error => console.log('Error: ', error)) */
+      this.socket.emit('outputChange', outputs.outputs)
     }
   }
 }

@@ -15,17 +15,10 @@
               <v-flex md6 xs11 class="mr-3">
                   <v-card>
                     <v-card-title>
-                      <div calss="headline">Direct Acces to Outputs</div>
+                      <div calss="headline">Outputs</div>
                     </v-card-title>
                     <v-card-text>
-                      <v-switch v-bind:label="`Q 0.0`" color="cyan lighten-2" v-model="q00"></v-switch>
-                      <v-switch v-bind:label="`Q 0.1`" color="cyan lighten-2" v-model="q01"></v-switch>
-                      <v-switch v-bind:label="`Q 0.2`" color="cyan lighten-2" v-model="q02"></v-switch>
-                      <v-switch v-bind:label="`Q 0.3`" color="cyan lighten-2" v-model="q03"></v-switch>
-                      <v-switch v-bind:label="`Q 0.4`" color="cyan lighten-2" v-model="q04"></v-switch>
-                      <v-switch v-bind:label="`Q 0.5`" color="cyan lighten-2" v-model="q05"></v-switch>
-                      <v-switch v-bind:label="`Q 0.6`" color="cyan lighten-2" v-model="q06"></v-switch>
-                      <v-switch v-bind:label="`Q 0.7`" color="cyan lighten-2" v-model="q07 "></v-switch>
+                      <v-switch v-for="item in outputs" :key="item.i" :label="item.label" color="cyan lighten-2" v-model.number="item.value"></v-switch>
                     </v-card-text>
                   </v-card>
               </v-flex>
@@ -35,14 +28,7 @@
                       <div calss="headline">PLC Status</div>
                     </v-card-title>
                     <v-card-text class="text-color">
-                      <v-checkbox label="Q 0.0" v-model="q00" color="success"></v-checkbox>
-                      <v-checkbox label="Q 0.1" v-model="q01" color="success"></v-checkbox>
-                      <v-checkbox label="Q 0.2" v-model="q02" color="success"></v-checkbox>
-                      <v-checkbox label="Q 0.3" v-model="q03" color="success"></v-checkbox>
-                      <v-checkbox label="Q 0.4" v-model="q04" color="success"></v-checkbox>
-                      <v-checkbox label="Q 0.5" v-model="q05" color="success"></v-checkbox>
-                      <v-checkbox label="Q 0.6" v-model="q06" color="success"></v-checkbox>
-                      <v-checkbox label="Q 0.7" v-model="q07 " color="success"></v-checkbox>
+                      <v-checkbox v-for="item in status" :key="item.i" :label="item.label" v-model="item.value" color="success"></v-checkbox>
                     </v-card-text>
                   </v-card>
               </v-flex>
@@ -60,62 +46,119 @@ export default {
   name: 'Outputs',
   data: () => {
     return {
-      q00: false,
-      q01: false,
-      q02: false,
-      q03: false,
-      q04: false,
-      q05: false,
-      q06: false,
-      q07: false
+      outputs: [
+      { name: 'q00', i: 1, byte: 0, bit: 0, value: false, label: 'Q 8.0' },
+      { name: 'q01', i: 2, byte: 0, bit: 1, value: false, label: 'Q 8.1' },
+      { name: 'q02', i: 3, byte: 0, bit: 2, value: false, label: 'Q 8.2' },
+      { name: 'q03', i: 4, byte: 0, bit: 3, value: false, label: 'Q 8.3' },
+      { name: 'q04', i: 5, byte: 0, bit: 4, value: false, label: 'Q 8.4' },
+      { name: 'q05', i: 6, byte: 0, bit: 5, value: false, label: 'Q 8.5' },
+      { name: 'q06', i: 7, byte: 0, bit: 6, value: false, label: 'Q 8.6' },
+      { name: 'q07', i: 8, byte: 0, bit: 7, value: false, label: 'Q 8.7' },
+      { name: 'q08', i: 9, byte: 1, bit: 0, value: false, label: 'Q 9.0' },
+      { name: 'q09', i: 10, byte: 1, bit: 1, value: false, label: 'Q 9.1' },
+      { name: 'q10', i: 11, byte: 1, bit: 2, value: false, label: 'Q 9.2' },
+      { name: 'q11', i: 12, byte: 1, bit: 3, value: false, label: 'Q 9.3' },
+      { name: 'q12', i: 13, byte: 1, bit: 4, value: false, label: 'Q 9.4' },
+      { name: 'q13', i: 14, byte: 1, bit: 5, value: false, label: 'Q 9.5' },
+      { name: 'q14', i: 15, byte: 1, bit: 6, value: false, label: 'Q 9.6' },
+      { name: 'q15', i: 16, byte: 1, bit: 7, value: false, label: 'Q 9.7' },
+      { name: 'q16', i: 17, byte: 2, bit: 0, value: false, label: 'Q 10.0' },
+      { name: 'q17', i: 18, byte: 2, bit: 1, value: false, label: 'Q 10.1' },
+      { name: 'q18', i: 19, byte: 2, bit: 2, value: false, label: 'Q 10.2' },
+      { name: 'q19', i: 20, byte: 2, bit: 3, value: false, label: 'Q 10.3' },
+      { name: 'q20', i: 21, byte: 2, bit: 4, value: false, label: 'Q 10.4' },
+      { name: 'q21', i: 22, byte: 2, bit: 5, value: false, label: 'Q 10.5' },
+      { name: 'q22', i: 23, byte: 2, bit: 6, value: false, label: 'Q 10.6' },
+      { name: 'q23', i: 24, byte: 2, bit: 7, value: false, label: 'Q 10.7' },
+      { name: 'q24', i: 25, byte: 3, bit: 0, value: false, label: 'Q 11.0' },
+      { name: 'q25', i: 26, byte: 3, bit: 1, value: false, label: 'Q 11.1' },
+      { name: 'q26', i: 27, byte: 3, bit: 2, value: false, label: 'Q 11.2' },
+      { name: 'q27', i: 28, byte: 3, bit: 3, value: false, label: 'Q 11.3' },
+      { name: 'q28', i: 30, byte: 3, bit: 4, value: false, label: 'Q 11.4' },
+      { name: 'q29', i: 31, byte: 3, bit: 5, value: false, label: 'Q 11.5' },
+      { name: 'q30', i: 32, byte: 3, bit: 6, value: false, label: 'Q 11.6' },
+      { name: 'q31', i: 33, byte: 3, bit: 7, value: false, label: 'Q 11.7' }
+      ],
+      status: [
+      { name: 'q00', i: 1, byte: 0, bit: 0, value: false, label: 'Q 8.0' },
+      { name: 'q01', i: 2, byte: 0, bit: 1, value: false, label: 'Q 8.1' },
+      { name: 'q02', i: 3, byte: 0, bit: 2, value: false, label: 'Q 8.2' },
+      { name: 'q03', i: 4, byte: 0, bit: 3, value: false, label: 'Q 8.3' },
+      { name: 'q04', i: 5, byte: 0, bit: 4, value: false, label: 'Q 8.4' },
+      { name: 'q05', i: 6, byte: 0, bit: 5, value: false, label: 'Q 8.5' },
+      { name: 'q06', i: 7, byte: 0, bit: 6, value: false, label: 'Q 8.6' },
+      { name: 'q07', i: 8, byte: 0, bit: 7, value: false, label: 'Q 8.7' },
+      { name: 'q08', i: 9, byte: 1, bit: 0, value: false, label: 'Q 9.0' },
+      { name: 'q09', i: 10, byte: 1, bit: 1, value: false, label: 'Q 9.1' },
+      { name: 'q10', i: 11, byte: 1, bit: 2, value: false, label: 'Q 9.2' },
+      { name: 'q11', i: 12, byte: 1, bit: 3, value: false, label: 'Q 9.3' },
+      { name: 'q12', i: 13, byte: 1, bit: 4, value: false, label: 'Q 9.4' },
+      { name: 'q13', i: 14, byte: 1, bit: 5, value: false, label: 'Q 9.5' },
+      { name: 'q14', i: 15, byte: 1, bit: 6, value: false, label: 'Q 9.6' },
+      { name: 'q15', i: 16, byte: 1, bit: 7, value: false, label: 'Q 9.7' },
+      { name: 'q16', i: 17, byte: 2, bit: 0, value: false, label: 'Q 10.0' },
+      { name: 'q17', i: 18, byte: 2, bit: 1, value: false, label: 'Q 10.1' },
+      { name: 'q18', i: 19, byte: 2, bit: 2, value: false, label: 'Q 10.2' },
+      { name: 'q19', i: 20, byte: 2, bit: 3, value: false, label: 'Q 10.3' },
+      { name: 'q20', i: 21, byte: 2, bit: 4, value: false, label: 'Q 10.4' },
+      { name: 'q21', i: 22, byte: 2, bit: 5, value: false, label: 'Q 10.5' },
+      { name: 'q22', i: 23, byte: 2, bit: 6, value: false, label: 'Q 10.6' },
+      { name: 'q23', i: 24, byte: 2, bit: 7, value: false, label: 'Q 10.7' },
+      { name: 'q24', i: 25, byte: 3, bit: 0, value: false, label: 'Q 11.0' },
+      { name: 'q25', i: 26, byte: 3, bit: 1, value: false, label: 'Q 11.1' },
+      { name: 'q26', i: 27, byte: 3, bit: 2, value: false, label: 'Q 11.2' },
+      { name: 'q27', i: 28, byte: 3, bit: 3, value: false, label: 'Q 11.3' },
+      { name: 'q28', i: 30, byte: 3, bit: 4, value: false, label: 'Q 11.4' },
+      { name: 'q29', i: 31, byte: 3, bit: 5, value: false, label: 'Q 11.5' },
+      { name: 'q30', i: 32, byte: 3, bit: 6, value: false, label: 'Q 11.6' },
+      { name: 'q31', i: 33, byte: 3, bit: 7, value: false, label: 'Q 11.7' }
+      ]
     }
   },
   watch: {
-    q00 () {
-      this.outputChange()
-    },
-    q01 () {
-      this.outputChange()
-    },
-    q02 () {
-      this.outputChange()
-    },
-    q03 () {
-      this.outputChange()
-    },
-    q04 () {
-      this.outputChange()
-    },
-    q05 () {
-      this.outputChange()
-    },
-    q06 () {
-      this.outputChange()
-    },
-    q07 () {
-      this.outputChange()
-    },
-    q08 () {
-      this.outputChange()
+    outputs: {
+      // watching if the output state changes
+
+      handler: function (val, oldVal) {
+        this.outputChange()
+        // console.log('outputs changed..', this.outputs)
+      },
+      deep: true
     }
   },
   methods: {
     outputChange () {
-      let outputs = {
-        q00: this.q00,
-        q01: this.q01,
-        q02: this.q02,
-        q03: this.q03,
-        q04: this.q04,
-        q05: this.q05,
-        q06: this.q06,
-        q07: this.q07
+      // Forming an array of bits out of an Array of objects
+
+      let out = []
+
+      // The for loop checks every index of the array an convert it to bits
+
+      for (let i = 0; i < this.outputs.length; i++) {
+
+        // If the index is boolen "true" the bit array recieves an 1
+
+        if (this.outputs[i].value === true) {
+          out.push(1)
+
+        // If the index is boolean "false" the bit array recieves an 0
+
+        } else if ((this.outputs[i].value === false)) {
+          out.push(0)
+        }
+
+        // If the for loop reached the end, data is sent out
+
+        if ((this.outputs.length - 1) === i) {
+          console.log('out: ', JSON.stringify(out))
+          this.$socket.emit('outputChange', JSON.stringify(out))
+        }
       }
-      console.log(outputs)
-      this.$store.dispatch('switchOutput', {
-        outputs
-      })
     }
+  },
+  beforeMount () {
+    this.$socket.emit('readConfig')
   }
 }
 </script>

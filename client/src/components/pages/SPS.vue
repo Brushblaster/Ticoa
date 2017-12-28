@@ -10,7 +10,7 @@
                 </div>
               </v-card-title>
               <v-card-actions>
-                <v-switch v-bind:label="`Switch 1: ${ex11.toString()}`" v-model="ex11"></v-switch>
+
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -22,6 +22,9 @@
                   <h3 class="headline mb-0">CPU Status</h3>
                 </div>
               </v-card-title>
+              <v-card-text>
+                CPU info
+              </v-card-text>
             </v-card>
           </v-flex>
       </v-layout>
@@ -33,7 +36,9 @@ export default {
   data () {
     return {
       ex11: true,
-      isMobile: false
+      isMobile: false,
+      cpuInfo: {},
+      orderCode: {}
     }
   },
   mounted () {
@@ -46,6 +51,15 @@ export default {
   methods: {
     onResize () {
       this.isMobile = window.innerWidth < 600
+    },
+    writeConfig () {
+      this.$socket.emit('readConfig')
+    },
+    sendData () {
+      this.$socket.emit('startPlc')
+    },
+    sendData2 () {
+      this.$socket.emit('startPlc2')
     }
   },
   computed: {
@@ -60,8 +74,38 @@ export default {
 
       return binding
     }
+  },
+  beforeMount () {
+    this.$socket.emit('readConfig')
+    this.$socket.emit('plcGetCpuInfo')
+    this.$socket.emit('plcGetOrderCode')
+  },
+  sockets: {
+    plcGetCpuInfo_res: function (data) {
+      if (data.execTime) {
+        let msgExecTime = data.execTime + ' ms - '
+        this.cpuInfo.execTime = msgExecTime
+      }
+      let prop
+      if (data.err === null) {
+        this.cpuInfo = data.cpuInfo
+      }
+      console.log('data: ', this.cpuInfo)
+    },
+    plcGetOrderCode_res: function (data) {
+      if (data.execTime) {
+        let msgExecTime = data.execTime + ' ms - '
+        this.orderCode.execTime = msgExecTime
+      }
+      if (data.err === null) {
+        this.orderCode = data.orderCode
+        console.log(data)
+      }
+
+    }
   }
 }
+
 </script>
 
 <style lang="stylus">
