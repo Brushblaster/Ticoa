@@ -1,9 +1,8 @@
 <template>
   <v-container grid-list-xs>
-    <h1 class="text-xs-center display-1">Iutput</h1>
     <v-layout row wrap justify-center>
       <v-flex xs11 flexbox>
-        <v-card class="elevation-12 light-blue darken-2">
+        <v-card class="elevation-12 light-blue accent-3">
           <v-card-title primary-title>
             <div class="headline">Boolean</div>
           </v-card-title>
@@ -15,17 +14,10 @@
               <v-flex md6 xs11 class="mr-3">
                   <v-card>
                     <v-card-title>
-                      <div calss="headline">Direct Acces to Inputs</div>
+                      <div calss="headline">Inputs</div>
                     </v-card-title>
                     <v-card-text>
-                      <v-switch v-bind:label="`I 0.0`" color="cyan lighten-2" v-model="i0_0"></v-switch>
-                      <v-switch v-bind:label="`I 0.1`" color="cyan lighten-2" v-model="i0_1"></v-switch>
-                      <v-switch v-bind:label="`I 0.2`" color="cyan lighten-2" v-model="i0_2"></v-switch>
-                      <v-switch v-bind:label="`I 0.3`" color="cyan lighten-2" v-model="i0_3"></v-switch>
-                      <v-switch v-bind:label="`I 0.4`" color="cyan lighten-2" v-model="i0_4"></v-switch>
-                      <v-switch v-bind:label="`I 0.5`" color="cyan lighten-2" v-model="i0_5"></v-switch>
-                      <v-switch v-bind:label="`I 0.6`" color="cyan lighten-2" v-model="i0_6"></v-switch>
-                      <v-switch v-bind:label="`I 0.7`" color="cyan lighten-2" v-model="i0_7"></v-switch>
+                      <v-switch v-for="item in inputs" :key="item.i" :label="item.label" color="cyan lighten-2" v-model.number="item.value"></v-switch>
                     </v-card-text>
                   </v-card>
               </v-flex>
@@ -35,14 +27,7 @@
                       <div calss="headline">PLC Status</div>
                     </v-card-title>
                     <v-card-text class="text-color">
-                      <v-checkbox label="I 0.0" v-model="i0_0" color="success"></v-checkbox>
-                      <v-checkbox label="I 0.1" v-model="i0_1" color="success"></v-checkbox>
-                      <v-checkbox label="I 0.2" v-model="i0_2" color="success"></v-checkbox>
-                      <v-checkbox label="I 0.3" v-model="i0_3" color="success"></v-checkbox>
-                      <v-checkbox label="I 0.4" v-model="i0_4" color="success"></v-checkbox>
-                      <v-checkbox label="I 0.5" v-model="i0_5" color="success"></v-checkbox>
-                      <v-checkbox label="I 0.6" v-model="i0_6" color="success"></v-checkbox>
-                      <v-checkbox label="I 0.7" v-model="i0_7" color="success"></v-checkbox>
+                      <v-checkbox v-for="item in status" :key="item.i" :label="item.label" v-model="item.value" color="success"></v-checkbox>
                     </v-card-text>
 
                   </v-card>
@@ -60,19 +45,114 @@
 export default {
   data () {
     return {
-      i0_0: false,
-      i0_1: false,
-      i0_2: false,
-      i0_3: false,
-      i0_4: false,
-      i0_5: false,
-      i0_6: false,
-      i0_7: false
+      inputs: [
+      { name: 'i00', i: 1, byte: 0, bit: 0, value: false, label: 'I 8.0' },
+      { name: 'i01', i: 2, byte: 0, bit: 1, value: false, label: 'I 8.1' },
+      { name: 'i02', i: 3, byte: 0, bit: 2, value: false, label: 'I 8.2' },
+      { name: 'i03', i: 4, byte: 0, bit: 3, value: false, label: 'I 8.3' },
+      { name: 'i04', i: 5, byte: 0, bit: 4, value: false, label: 'I 8.4' },
+      { name: 'i05', i: 6, byte: 0, bit: 5, value: false, label: 'I 8.5' },
+      { name: 'i06', i: 7, byte: 0, bit: 6, value: false, label: 'I 8.6' },
+      { name: 'i07', i: 8, byte: 0, bit: 7, value: false, label: 'I 8.7' },
+      { name: 'i08', i: 9, byte: 1, bit: 0, value: false, label: 'I 9.0' },
+      { name: 'i09', i: 10, byte: 1, bit: 1, value: false, label: 'I 9.1' },
+      { name: 'i10', i: 11, byte: 1, bit: 2, value: false, label: 'I 9.2' },
+      { name: 'i11', i: 12, byte: 1, bit: 3, value: false, label: 'I 9.3' },
+      { name: 'i12', i: 13, byte: 1, bit: 4, value: false, label: 'I 9.4' },
+      { name: 'i13', i: 14, byte: 1, bit: 5, value: false, label: 'I 9.5' },
+      { name: 'i14', i: 15, byte: 1, bit: 6, value: false, label: 'I 9.6' },
+      { name: 'i15', i: 16, byte: 1, bit: 7, value: false, label: 'I 9.7' },
+      { name: 'i16', i: 17, byte: 2, bit: 0, value: false, label: 'I 10.0' },
+      { name: 'i17', i: 18, byte: 2, bit: 1, value: false, label: 'I 10.1' },
+      { name: 'i18', i: 19, byte: 2, bit: 2, value: false, label: 'I 10.2' },
+      { name: 'i19', i: 20, byte: 2, bit: 3, value: false, label: 'I 10.3' },
+      { name: 'i20', i: 21, byte: 2, bit: 4, value: false, label: 'I 10.4' },
+      { name: 'i21', i: 22, byte: 2, bit: 5, value: false, label: 'I 10.5' },
+      { name: 'i22', i: 23, byte: 2, bit: 6, value: false, label: 'I 10.6' },
+      { name: 'i23', i: 24, byte: 2, bit: 7, value: false, label: 'I 10.7' },
+      { name: 'i24', i: 25, byte: 3, bit: 0, value: false, label: 'I 11.0' },
+      { name: 'i25', i: 26, byte: 3, bit: 1, value: false, label: 'I 11.1' },
+      { name: 'i26', i: 27, byte: 3, bit: 2, value: false, label: 'I 11.2' },
+      { name: 'i27', i: 28, byte: 3, bit: 3, value: false, label: 'I 11.3' },
+      { name: 'i28', i: 30, byte: 3, bit: 4, value: false, label: 'I 11.4' },
+      { name: 'i29', i: 31, byte: 3, bit: 5, value: false, label: 'I 11.5' },
+      { name: 'i30', i: 32, byte: 3, bit: 6, value: false, label: 'I 11.6' },
+      { name: 'i31', i: 33, byte: 3, bit: 7, value: false, label: 'I 11.7' }
+      ],
+      status: [
+      { name: 'i00', i: 1, byte: 0, bit: 0, value: false, label: 'I 8.0' },
+      { name: 'i01', i: 2, byte: 0, bit: 1, value: false, label: 'I 8.1' },
+      { name: 'i02', i: 3, byte: 0, bit: 2, value: false, label: 'I 8.2' },
+      { name: 'i03', i: 4, byte: 0, bit: 3, value: false, label: 'I 8.3' },
+      { name: 'i04', i: 5, byte: 0, bit: 4, value: false, label: 'I 8.4' },
+      { name: 'i05', i: 6, byte: 0, bit: 5, value: false, label: 'I 8.5' },
+      { name: 'i06', i: 7, byte: 0, bit: 6, value: false, label: 'I 8.6' },
+      { name: 'i07', i: 8, byte: 0, bit: 7, value: false, label: 'I 8.7' },
+      { name: 'i08', i: 9, byte: 1, bit: 0, value: false, label: 'I 9.0' },
+      { name: 'i09', i: 10, byte: 1, bit: 1, value: false, label: 'I 9.1' },
+      { name: 'i10', i: 11, byte: 1, bit: 2, value: false, label: 'I 9.2' },
+      { name: 'i11', i: 12, byte: 1, bit: 3, value: false, label: 'I 9.3' },
+      { name: 'i12', i: 13, byte: 1, bit: 4, value: false, label: 'I 9.4' },
+      { name: 'i13', i: 14, byte: 1, bit: 5, value: false, label: 'I 9.5' },
+      { name: 'i14', i: 15, byte: 1, bit: 6, value: false, label: 'I 9.6' },
+      { name: 'i15', i: 16, byte: 1, bit: 7, value: false, label: 'I 9.7' },
+      { name: 'i16', i: 17, byte: 2, bit: 0, value: false, label: 'I 10.0' },
+      { name: 'i17', i: 18, byte: 2, bit: 1, value: false, label: 'I 10.1' },
+      { name: 'i18', i: 19, byte: 2, bit: 2, value: false, label: 'I 10.2' },
+      { name: 'i19', i: 20, byte: 2, bit: 3, value: false, label: 'I 10.3' },
+      { name: 'i20', i: 21, byte: 2, bit: 4, value: false, label: 'I 10.4' },
+      { name: 'i21', i: 22, byte: 2, bit: 5, value: false, label: 'I 10.5' },
+      { name: 'i22', i: 23, byte: 2, bit: 6, value: false, label: 'I 10.6' },
+      { name: 'i23', i: 24, byte: 2, bit: 7, value: false, label: 'I 10.7' },
+      { name: 'i24', i: 25, byte: 3, bit: 0, value: false, label: 'I 11.0' },
+      { name: 'i25', i: 26, byte: 3, bit: 1, value: false, label: 'I 11.1' },
+      { name: 'i26', i: 27, byte: 3, bit: 2, value: false, label: 'I 11.2' },
+      { name: 'i27', i: 28, byte: 3, bit: 3, value: false, label: 'I 11.3' },
+      { name: 'i28', i: 30, byte: 3, bit: 4, value: false, label: 'I 11.4' },
+      { name: 'i29', i: 31, byte: 3, bit: 5, value: false, label: 'I 11.5' },
+      { name: 'i30', i: 32, byte: 3, bit: 6, value: false, label: 'I 11.6' },
+      { name: 'i31', i: 33, byte: 3, bit: 7, value: false, label: 'I 11.7' }
+      ]
+    }
+  },
+  watch: {
+    inputs: {
+      // watching if the output state changes
+      handler: function (val, oldVal) {
+        this.status = this.inputs
+        this.inputChange()
+      },
+      deep: true
     }
   },
   methods: {
-    I0_0: () => {
+    inputChange () {
+      // Forming an array of bits out of an Array of objects
 
+      let inp = []
+
+      // The for loop checks every index of the array an convert it to bits
+
+      for (let i = 0; i < this.inputs.length; i++) {
+
+        // If the index is boolen "true" the bit array recieves an 1
+
+        if (this.inputs[i].value === true) {
+          inp.push(1)
+
+        // If the index is boolean "false" the bit array recieves an 0
+
+        } else if ((this.inputs[i].value === false)) {
+          inp.push(0)
+        }
+
+        // If the for loop reached the end, data is sent out
+
+        if ((this.inputs.length - 1) === i) {
+          console.log('inp: ', JSON.stringify(inp))
+          this.$socket.emit('inputChange', JSON.stringify(inp))
+        }
+      }
     }
   }
 }

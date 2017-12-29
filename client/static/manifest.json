@@ -1,6 +1,6 @@
 {
-  "name": "ticoa",
-  "short_name": "ticoa",
+  "name": "Ticoa",
+  "short_name": "Ticoa",
   "icons": [
     {
       "src": "img/icons/android-chrome-192x192.png",
@@ -13,8 +13,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "background_color": "#455A64",
+  "theme_color": "#1B2030"
 }

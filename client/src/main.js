@@ -9,6 +9,7 @@ import App from './App'
 import router from './router'
 import './utils/apiCrecentials'
 import VueSocketio from 'vue-socket.io'
+import fetchConfig from './config/fetchConfig'
 // import socket from 'socket.io-client'
 
 Vue.use(Vuetify, {
@@ -45,7 +46,7 @@ router.beforeEach((to, from, next) => {
 
 Vue.config.productionTip = false
 
-Vue.use(VueSocketio, 'http://localhost:8081' && 'http://192.168.1.107:8081')
+Vue.use(VueSocketio, fetchConfig.socketURL && fetchConfig.socketURL2)
 
 // console.log(this.$store.state.connect)
 

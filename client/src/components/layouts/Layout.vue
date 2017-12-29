@@ -45,12 +45,23 @@
       <v-btn icon @click.stop="options =! options">
         <v-icon>more_vert</v-icon>
       </v-btn>
+      <v-dialog v-model="options" presistent max-width="350px">
+      <v-card>
+        <v-card-media
+        src="../../../static/img/joda.jpg"
+        height="250px">
+        </v-card-media>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn color="blue darken-1" flat @click.stop="options =! options">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-dialog>
     </v-toolbar>
     <v-content>
       <router-view >
         <v-container fluid></v-container>
       </router-view>
-      <!-- <loading v-else /> -->
     </v-content>
   </div>
 </template>

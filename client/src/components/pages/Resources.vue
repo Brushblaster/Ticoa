@@ -1,36 +1,27 @@
 <template>
-  <div>
-    <h1> rescoureces Page </h1>
-    <div id="gauges">
-    </div>
-    <div id="gauges2">
-    </div>
-    <v-card>
+  <v-container fluid>
+    <v-layout d-flex justify-center>
+      <v-flex xs-11>
+      <v-card class="elevation-12" color="" v-ripple>
+      <v-card-media
+      src="http://www.antjelang.de/images/240px-CH-Gefahrensignal-Baustelle.svg.png"
+      height="280px"
+      position="relativ">
+      </v-card-media>
       <v-card-text>
-        <v-slider
-        min="0"
-        max="300"
-        step="0"
-        ></v-slider>
-        <v-slider
-        step="0"
-        min="0"
-        max="300"
-        ></v-slider>
+        <h1 class="dislplay-3 text-xs-center">under Construction !</h1>
       </v-card-text>
-    </v-card>
-  </div>
+      </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-// import VueCharts from 'vue-chartjs'
-
 export default {
   name: 'Resources',
   data () {
     return {
-      value1: 0,
-      value2: 0
     }
   },
   components: {
@@ -39,12 +30,5 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#gauges
-  display block
-  margin auto
-  width 10%
 
-#gauges2
-  margin auto
-  width 10%
 </style>

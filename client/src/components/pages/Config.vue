@@ -1,17 +1,16 @@
 <template>
   <v-container grid-list-xs>
-    <h1 class="text-xs-center display-1">Config</h1>
     <v-layout row wrap justify-center>
       <v-flex xs11 flexbox>
 
         <!-- Network Card -->
 
-        <v-card class="elevation-12 light-blue darken-2">
+        <v-card class="elevation-12 light-blue accent-3">
           <v-card-title primary-title>
             <div class="headline">Networking</div>
           </v-card-title>
           <v-card-media
-          src="https://www.networkcomputing.com/sites/default/files/resources/nwc/network%20opt.jpg"
+          src="../../../static/img/networkopt.jpg"
           height="250px">
           </v-card-media>
           <v-card-text>
@@ -53,12 +52,12 @@
 
         <!-- Rack card -->
 
-        <v-card class="mt-4 elevation-12 light-blue darken-2">
+        <v-card class="mt-4 elevation-12 light-blue accent-3">
           <v-card-title primary-title>
             <div class="headline">Rack adjustments</div>
           </v-card-title>
           <v-card-media
-          src="https://www.siemens.com/press/pool/de/pressebilder/2013/industry/industry-automation/300dpi/I2013112402-01_300dpi.jpg"
+          src="../../../static/img/I2013112402-01_300dpi.jpg"
           height="250px">
           </v-card-media>
           <v-card-text>
@@ -96,7 +95,7 @@
             <v-btn
             @click="getLastConfigData"
             >
-            Load Last Config
+            Load
             </v-btn>
           </v-card-actions>
           <p class="ml-2 caption">Timestamp of last Config: {{ this.createdOn }}</p>

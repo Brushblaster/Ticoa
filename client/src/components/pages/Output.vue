@@ -1,9 +1,8 @@
 <template>
   <v-container grid-list-xs>
-    <h1 class="text-xs-center display-1">Output</h1>
     <v-layout row wrap justify-center>
       <v-flex xs11 flexbox>
-        <v-card class="elevation-12 light-blue darken-2">
+        <v-card class="elevation-12 light-blue accent-3">
           <v-card-title primary-title>
             <div class="headline">Boolean</div>
           </v-card-title>
@@ -119,10 +118,9 @@ export default {
   watch: {
     outputs: {
       // watching if the output state changes
-
       handler: function (val, oldVal) {
+        this.status = this.outputs
         this.outputChange()
-        // console.log('outputs changed..', this.outputs)
       },
       deep: true
     }
