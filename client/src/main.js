@@ -52,7 +52,7 @@ Vue.config.productionTip = true
 
 // Defining that Vuejs should use Vuetify
 
-Vue.use(VueSocketio, '192.168.1.111' || socketConfig.socketURL)
+Vue.use(VueSocketio, global.BASE_URL || socketConfig.socketURL)
 console.log(process.env.BASE_URL)
 
 // Define a new Instance of Vuejs

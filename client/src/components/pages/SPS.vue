@@ -142,6 +142,8 @@ export default {
     },
     plcStatus () {
       this.$socket.emit('plcStatus')
+      this.$socket.emit('plcGetCpuInfo')
+      this.$socket.emit('plcGetOrderCode')
     },
     plcGetCpuInfo () {
       this.$socket.emit('plcGetCpuInfo')
@@ -161,10 +163,6 @@ export default {
   },
   sockets: {
     plcGetCpuInfo_res: function (data) {
-      if (data.execTime) {
-        let msgExecTime = data.execTime + ' ms - '
-        this.cpuInfo.execTime = msgExecTime
-      }
       let prop
       if (data.err === null) {
         this.cpuInfo = data.cpuInfo
@@ -173,10 +171,6 @@ export default {
       }
     },
     plcGetOrderCode_res: function (data) {
-      if (data.execTime) {
-        let msgExecTime = data.execTime + ' ms - '
-        this.orderCode.execTime = msgExecTime
-      }
       if (data.err === null) {
         this.orderCode = data.orderCode
       } else {
@@ -184,9 +178,6 @@ export default {
       }
     },
     plcHotStart_res: function (data) {
-      if (data.execTime) {
-        let msgExecTime = data.execTime + ' ms - '
-      }
       if (data.err === null) {
         console.log(data)
       } else {
@@ -194,9 +185,6 @@ export default {
       }
     },
     plcColdStart_res: function (data) {
-      if (data.execTime) {
-        let msgExecTime = data.execTime + ' ms - '
-      }
       if (data.err === null) {
         console.log(data)
       } else {
@@ -204,9 +192,6 @@ export default {
       }
     },
     plcStop_res: function (data) {
-      if (data.execTime) {
-        let msgExecTime = data.execTime + ' ms - '
-      }
       if (data.err === null) {
         console.log(data)
       } else {
@@ -214,9 +199,6 @@ export default {
       }
     },
     plcStatus_res: function (data) {
-      if (data.execTime) {
-        let msgExecTime = data.execTime + ' ms - '
-      }
       if (data.err === null) {
         this.Status = data.plcStatus
         console.log(data)

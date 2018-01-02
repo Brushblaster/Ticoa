@@ -7,3 +7,4 @@ client/firestore.indexes.json
 client/firebase-debug.log
 server/public/
 client/src/utils/auth0config.j
+client/src/utils/auth0config.js
