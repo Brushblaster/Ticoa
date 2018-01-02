@@ -1,6 +1,6 @@
 export const AUTH_CONFIG = {
-  clientId: 'fvEkU1m_vk8VZGglspxVVzmPV_ViWhhA',
-  domain: 'ticoa.auth0.com',
-  callbackUrl: 'http://localhost:8080',
-  apiUrl: 'localhost:8080/ticoa'
+  clientId: '__your_ID__',
+  domain: '__yourDomain__',
+  callbackUrl: '__yourCallback__',
+  apiUrl: '__yourAPIurl__'
 }
