@@ -1,7 +1,7 @@
+<!-- indside here are the Manual section, where to define what nested page is to display, it provides the tabbar -->
 <template>
   <div>
     <v-container fluid gird-list-xs>
-      <!-- <h1 class="text-xs-center">Manual Page</h1> -->
     </v-container>
     <router-view class="Manual" name="a"></router-view>
     <div class="headline text-xs-center pa-5"></div>

@@ -1,6 +1,9 @@
+// Inside here the state, getters, mutations and actions for the Authentification service are stored
+
 import router from '../../../router'
 
 export default {
+  // defining witch state to hold
   state: {
     isAuthenticated: false,
     loginAlert: false

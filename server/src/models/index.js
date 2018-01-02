@@ -3,7 +3,6 @@ const path = require('path')
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 const config = require('../config/config')
-const User = require('./user')
 const CommConf = require('./config')
 const Output = require('./output')
 
@@ -14,6 +13,5 @@ mongoose.connect(config.dbAddress, {
 
 module.exports = {
   CommConf: CommConf,
-  User: User,
   Output: Output
 }

@@ -1,5 +1,5 @@
 const snap7 = require('node-snap7')
-// const getConfig = require('./getConfig')
+const getConfig = require('./getConfig')
 const db = require('../models')
 const io = require('socket.io')
 const bitBuffer = require('bit-buffer')
@@ -24,7 +24,7 @@ var config = {}
 
 exports = module.exports = function (io) {
   io.sockets.on('connection', function (socket) {
-    // reading config from DB
+    // reading config from DB for auto setting the connection Params
 
     socket.on('readConfig', function () {
       let addr = db.CommConf.findOne({}, { config: true, _id: false }, { sort: { createdOn: -1 } },

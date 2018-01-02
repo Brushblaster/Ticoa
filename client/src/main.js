@@ -1,16 +1,16 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// main.js
+// This is the Main entry file, inside here is the Root of the application
+
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import { store } from './store'
 import 'vuetify/dist/vuetify.css'
-import 'material-design-icons/iconfont/material-icons.css'
 import App from './App'
 import router from './router'
-import './utils/apiCrecentials'
 import VueSocketio from 'vue-socket.io'
-import fetchConfig from './config/fetchConfig'
-// import socket from 'socket.io-client'
+import socketConfig from './config/socketConfig'
+
+// define the Vuetify theme structure
 
 Vue.use(Vuetify, {
   theme: {
@@ -19,6 +19,8 @@ Vue.use(Vuetify, {
     // secondary: '#3C4561'
   }
 })
+
+// get sure, that only authenticated Users can access the routes
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -40,15 +42,20 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    next() // make sure to always call next()!
+    next()
   }
 })
 
-Vue.config.productionTip = false
+// Defining the Enviroment for the Vuejs application
 
-Vue.use(VueSocketio, fetchConfig.socketURL && fetchConfig.socketURL2)
+Vue.config.productionTip = true
 
-// console.log(this.$store.state.connect)
+// Defining that Vuejs should use Vuetify
+
+Vue.use(VueSocketio, '192.168.1.111' || socketConfig.socketURL)
+console.log(process.env.BASE_URL)
+
+// Define a new Instance of Vuejs
 
 /* eslint-disable no-new */
 new Vue({
@@ -57,7 +64,9 @@ new Vue({
   store,
   template: '<App/>',
   components: { App },
-  // Autologin based on existing token inside the local Storage
+
+  // If the token was sent from auth0 authentication service it is stored with an expiry date inside of the local storage
+  // If there is allready an token inside the storage, the user can proceed without authenticate again
   beforeMount: () => {
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
     let isAuthValid = (new Date().getTime() < (expiresAt))

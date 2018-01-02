@@ -32,6 +32,7 @@
     "morgan": "^1.9.0",
     "node-bitarray": "^0.1.0",
     "node-snap7": "^0.4.0",
+    "raven": "^2.3.0",
     "socket.io": "^2.0.4"
   }
 }

@@ -1,3 +1,4 @@
+<!-- inside here the output bits are set and sent to the server -->
 <template>
   <v-container grid-list-xs>
     <v-layout row wrap justify-center>

@@ -1,8 +1,12 @@
+<!-- Inside the App.vue component the entire app is build -->
+
 <template>
   <v-app dark class="blue-grey darken-2">
     <Layout/>
     <v-footer fixed app color="blue-grey lighten-1">
-      <span>&copy; 2017 | D.Käch</span>
+      <span class="ml-4">&copy; 2017 | D.Käch</span>
+      <v-spacer />
+      <a class="mr-4" href="https://next.vuetifyjs.com"><span>created with awsome Vuetify</span></a>
     </v-footer>
   </v-app>
 </template>
@@ -34,11 +38,5 @@ export default {
 </script>
 
 <style lang="stylus">
-  @import './stylus/main.styl'
 
-/*
-  .application--dark {
-    background-color: #3C4561;
-  }
-*/
 </style>

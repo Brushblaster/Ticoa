@@ -1,11 +1,12 @@
-// import auth0 from 'auth0-js'
+// Inside here the AuthentificationService is located
+
 import Auth0Lock from 'auth0-lock'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
 import decode from '../../node_modules/jwt-decode'
 import { AUTH_CONFIG } from './auth0config'
-// import vuex from 'vuex'
 
+// Export the AuthService as a class to serve it to other components of the app and get reusable
 export default class AuthService {
 
   authenticated = this.isAuthenticated()
@@ -32,11 +33,10 @@ export default class AuthService {
     this.isAdmin = this.isAdmin.bind(this)
   }
 
+  // Defining the LOCK module from Auth0 authtentification
   lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, {
-    // oidcConformant: true,
     autoclose: true,
     auth: {
-      // audience: AUTH_CONFIG.apiUrl,
       responseType: 'token id_token',
       params: {
         scope: 'openid profile read:order write:order'
@@ -52,29 +52,24 @@ export default class AuthService {
     }
   })
 
+  // defining the Method to show the lock screen
   login () {
     this.lock.show()
   }
-
+  // handling what happens if a user is logged in
   handleAuthentication () {
     this.auth0.parseHash((err, authResult) => {
       console.log(authResult)
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
-        // router.replace('/home')
-/*         this.store.dispatch('isAuthenticated', {
-          auth: true
-        }) */
       } else if (err) {
         router.replace('/')
         console.log(err)
-/*         this.store.dispatch('isAuthenticated', {
-          auth: false
-        }) */
       }
     })
   }
 
+  // Set a user connected session with the recieved token
   setSession (authResult) {
     if (authResult && authResult.accessToken && authResult.idToken) {
       // Set the time that the access token will expire at
@@ -90,6 +85,7 @@ export default class AuthService {
     }
   }
 
+  // Get the accesstoken from the local storage
   getAccessToken () {
     const accessToken = localStorage.getItem('access_token')
     if (!accessToken) {
@@ -98,6 +94,7 @@ export default class AuthService {
     return accessToken
   }
 
+  // Get the userprofile put of the response form Auth0
   getProfile (cb) {
     let accessToken = this.getAccessToken()
     let self = this
@@ -109,6 +106,7 @@ export default class AuthService {
     })
   }
 
+  // Defining the Method for logging out a user
   logout () {
     // Clear access token and ID token from local storage
     localStorage.removeItem('access_token')
@@ -120,6 +118,7 @@ export default class AuthService {
     router.replace('/')
   }
 
+  // Checking if the user is Authenticated
   isAuthenticated () {
     // Check whether the current time is past the
     // access token's expiry time
@@ -127,6 +126,7 @@ export default class AuthService {
     return console.log(new Date().getTime() < expiresAt)
   }
 
+  // Checking what role the user has
   getRole () {
     const namespace = 'https://example.com'
     const idToken = localStorage.getItem('id_token')
@@ -135,6 +135,7 @@ export default class AuthService {
     }
   }
 
+  // Checking if the user is rated as a Admin user
   isAdmin () {
     return this.getRole() === 'admin'
   }

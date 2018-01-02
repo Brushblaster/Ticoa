@@ -1,18 +1,17 @@
+<!-- inside here the is the main Page that is displayed to unauthenticated users -->
 <template>
     <div class="root">
       <v-layout row justify-center>
         <v-flex xs12 sm9 md7 lg5 xl3>
           <v-card light>
-            <v-card-media src="https://s3.amazonaws.com/revue/items/images/001/909/550/mail/vuetifyy.png?1492952240" height="197px" width="197px">
+            <v-card-media src="../../../static/img/vuetifyy.png" height="197px" width="197px">
             </v-card-media>
-            <!-- <v-card-title primary-title> -->
               <h3 class="display-1 mr-2 text-xs-center">Welcome to Ticoa</h3>
               <br>
               <div class="headline text-xs-center">
                 <h3>You are not logged in</h3>
                 <h3>Please login, now !</h3>
               </div>
-            <!--  </v-card-title> -->
             <v-card-actions>
               <v-btn flat color="blue" @click="login">Login</v-btn>
               <v-spacer />
@@ -31,7 +30,6 @@
         transition="scale-transition">
         You need to Logi in !
         </v-alert>
-      <!--<v-parallax src="../../../static/img/s7-1500_standard_cpus.jpg"></v-parallax>-->
   </div>
 </template>
 

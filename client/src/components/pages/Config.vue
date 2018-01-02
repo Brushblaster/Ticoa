@@ -145,9 +145,7 @@ export default {
         }
       }
       console.log(config)
-      this.$store.dispatch('sendConfig', {
-        config
-      })
+      this.$socket.emit('saveConfig', config)
     },
     clear () {
       this.networkTypeDD = null
@@ -156,42 +154,26 @@ export default {
       this.slotNo = ''
       this.rackNo = ''
       this.createdOn = ''
-      this.clearConfig()
     },
     getLastConfigData () {
-      store.dispatch('getLastConfig')
-      let config = store.getters.getConfig
-      console.log(config.netAddr)
-      this.networkTypeDD = config.networkType
-      this.protocolTypeDD = config.protocolType
-      this.netAddr = config.netAddr
-      this.slotNo = config.slotNo
-      this.rackNo = config.rackNo
-      moment.locale('de-ch')
-      let Dat = moment(config.createdOn).format('LLLL')
-      this.createdOn = Dat
-      console.log('netAddr: ', this.netAddr)
-    },
-    ...mapActions([
-      'getLastConfig'
-    ]),
-    ...mapMutations([
-      'saveConfig',
-      'clearConfig'
-    ])
-  },
-  computed: {
-    ...mapGetters([
-      'getConfig'
-    ])
-  },
-  beforeEnter () {
-    this.netAddr = store.getters.getConfig.netAddr
-    this.slotNo = store.getters.getConfig.slotNo
-    this.rackNo = store.getters.getConfig.rackNo
+      this.$socket.emit('getLastConfig')
+    }
   },
   beforeMount () {
-    store.dispatch('getLastConfig')
+    this.getLastConfigData()
+  },
+  sockets: {
+    getLastConfig_res: function (res) {
+      this.networkTypeDD = res.config.networkType
+      this.protocolTypeDD = res.config.protocolType
+      this.netAddr = res.config.netAddr
+      this.slotNo = res.config.slotNo
+      this.rackNo = res.config.rackNo
+      moment.locale('de-ch')
+      let Dat = moment(res.createdOn).format('LLLL')
+      this.createdOn = Dat
+      console.log('res: ', res)
+    }
   }
 }
 </script>

@@ -1,3 +1,5 @@
+<!-- This is the Main layout. Everything expect the root-path is rendered inside this layout component -->
+
 <template>
   <div>
     <v-system-bar color="primary"></v-system-bar>
@@ -17,9 +19,10 @@
           router
           :to="item.path"
           :disabled="item.disabled"
+          dark
         >
           <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
+            <v-icon light v-html="item.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title v-text="item.title"></v-list-tile-title>
@@ -27,7 +30,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app dark class="primary" :clipped-left="clipped">
+    <v-toolbar fixed app class="primary" :clipped-left="clipped">
       <v-toolbar-side-icon @click.stop="Sidebar = !Sidebar"></v-toolbar-side-icon>
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
@@ -59,6 +62,7 @@
       </v-dialog>
     </v-toolbar>
     <v-content>
+      <!-- takeing in the other components, they will be wrapped around with the layout -->
       <router-view >
         <v-container fluid></v-container>
       </router-view>
@@ -69,7 +73,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import AuthService from '../../utils/AuthService'
-import Loading from '../layouts/Loading'
 
 const auth = new AuthService()
 
@@ -97,7 +100,7 @@ export default {
       options: false,
       Sidebarlinks: [
         { icon: 'home', title: 'Home', path: '/home', disabled: this.isAuthenticated },
-        { icon: 'web', title: 'Resources', path: '/resources', disabled: this.isAuthenticated },
+        { icon: 'av_timer', title: 'Resources', path: '/resources', disabled: this.isAuthenticated },
         { icon: 'web', title: 'Manual', path: '/manual', disabled: this.isAuthenticated },
         { icon: 'device_hub', title: 'Admin', path: '/admin', disabled: true }
       ],
@@ -116,9 +119,6 @@ export default {
     test2 () {
       console.log(this.authenticated)
     }
-  },
-  components: {
-    Loading
   },
   computed: {
     ...mapGetters([

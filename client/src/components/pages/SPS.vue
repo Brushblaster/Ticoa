@@ -1,8 +1,9 @@
+<!-- inside here the static informations from the PLC are displayed -->
 <template>
   <v-container fluid grid-list-xs >
         <v-layout row wrap justify-center>
           <v-flex xs11 flexbox class="text-xs-center">
-<!--             <v-card class="mb-2 elevation-12 light-blue accent-3">
+             <v-card class="mb-2 elevation-12 light-blue accent-3">
               <v-card-title primary-title>
                 <div>
                   <h3 class="display-1 mb-0">CPU Control</h3>
@@ -11,31 +12,29 @@
               <v-card-text>
                 <v-layout>
                   <v-flex>
-                    <v-btn @click="$socket.emit('plcHotStart')">
+                    <v-btn @click="plcStatus">
                       Hot Start
                     </v-btn>
-                    <v-btn @click="$socket.emit('plcColdStart')">
+                    <v-btn @click="plcColdStart">
                       Cold Start
                     </v-btn>
-                    <v-btn @click="$socket.emit('plcStop')">
+                    <v-btn @click="plcStop">
                       Stop CPU
                     </v-btn>
-                    <v-btn @click="$socket.emit('plcStatus')">
+                    <v-btn @click="plcStatus">
                       Status CPU
                     </v-btn>
                   </v-flex>
 
                   <v-flex>
-                    <div></div>
-                    Status
+                    <div class="headline mt-2">Status: {{ this.Status }}</div>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-actions>
 
               </v-card-actions>
-            </v-card> -->
-
+            </v-card>
             <v-card class="mb-2 elevation-12 light-blue accent-3">
               <v-card-title primary-title>
                 <div>
@@ -124,44 +123,41 @@ export default {
       ex11: true,
       isMobile: false,
       cpuInfo: {},
-      orderCode: {}
+      orderCode: {},
+      Status: ''
     }
   },
-  mounted () {
-    // console.log(this.$vuetify.breakpoint)
-  },
-  beforeDestroy () {
-    this.onResize()
-    window.addEventListener('resize', this.onResize, { passive: true })
-  },
   methods: {
-    onResize () {
-      this.isMobile = window.innerWidth < 600
-    },
     writeConfig () {
       this.$socket.emit('readConfig')
     },
-    log () {
-      console.log(this.orderCode)
+    plcHotStart () {
+      this.$socket.emit('plcHotStart')
+    },
+    plcColdStart () {
+      this.$socket.emit('plcColdStart')
+    },
+    plcStop () {
+      this.$socket.emit('plcStop')
+    },
+    plcStatus () {
+      this.$socket.emit('plcStatus')
+    },
+    plcGetCpuInfo () {
+      this.$socket.emit('plcGetCpuInfo')
+    },
+    plcGetOrderCode () {
+      this.$socket.emit('plcGetOrderCode')
     }
-  },
-  computed: {
-    binding () {
-      const binding = {}
 
-      if (this.$vuetify.breakpoint.smAndUp) {
-        binding.row = true
-      } else if (this.$vuetify.breakpoint.smAndDown) {
-        binding.column = true
-      }
-
-      return binding
-    }
   },
   beforeMount () {
     this.$socket.emit('readConfig')
-    this.$socket.emit('plcGetCpuInfo')
-    this.$socket.emit('plcGetOrderCode')
+    setTimeout(() => {
+      this.plcStatus()
+      this.plcGetCpuInfo()
+      this.plcGetOrderCode()
+    }, 200)
   },
   sockets: {
     plcGetCpuInfo_res: function (data) {
@@ -172,8 +168,9 @@ export default {
       let prop
       if (data.err === null) {
         this.cpuInfo = data.cpuInfo
+      } else {
+        console.log('Read Cpu Info Error : ', data.err)
       }
-      console.log('data: ', this.cpuInfo)
     },
     plcGetOrderCode_res: function (data) {
       if (data.execTime) {
@@ -182,7 +179,8 @@ export default {
       }
       if (data.err === null) {
         this.orderCode = data.orderCode
-        console.log(this.orderCode)
+      } else {
+        console.log('Get Cpu order Code Error: ', data.err)
       }
     },
     plcHotStart_res: function (data) {
@@ -191,6 +189,8 @@ export default {
       }
       if (data.err === null) {
         console.log(data)
+      } else {
+        console.log('Plc Hot Start Error: ', data.err)
       }
     },
     plcColdStart_res: function (data) {
@@ -199,22 +199,29 @@ export default {
       }
       if (data.err === null) {
         console.log(data)
+      } else {
+        console.log('Plc Cold Start Error: ', data.err)
       }
     },
     plcStop_res: function (data) {
-            if (data.execTime) {
+      if (data.execTime) {
         let msgExecTime = data.execTime + ' ms - '
       }
       if (data.err === null) {
         console.log(data)
+      } else {
+        console.log('Plc Stop Error: ', data.err)
       }
     },
     plcStatus_res: function (data) {
-            if (data.execTime) {
+      if (data.execTime) {
         let msgExecTime = data.execTime + ' ms - '
       }
       if (data.err === null) {
+        this.Status = data.plcStatus
         console.log(data)
+      } else {
+        console.log('Plc Status Error: ', data.err)
       }
     }
   }

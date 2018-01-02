@@ -1,4 +1,4 @@
 module.exports = {
-  port: 8081,
+  port: process.env.PORT || 80,
   dbAddress: 'mongodb://localhost/ticoa'
 }

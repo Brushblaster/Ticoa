@@ -1,2 +1,0 @@
-
-const getConfig = require('./getConfig')

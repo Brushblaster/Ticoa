@@ -1,3 +1,4 @@
+<!-- inside here there are the inputs to wirte to the PLC -->
 <template>
   <v-container grid-list-xs>
     <v-layout row wrap justify-center>
