@@ -91,7 +91,7 @@ exports = module.exports = function (io) {
 
     // output change
     socket.on('outputChange', function (data) {
-      // console.log(data)
+      io.sockets.emit('outputChange_res', data)
       let dummy = JSON.parse(data)
       let byte0 = dummy.slice(0, 8)
       let byte1 = dummy.slice(8, 16)
@@ -117,6 +117,13 @@ exports = module.exports = function (io) {
           }
         })
       })
+    })
+
+    // Input Change
+
+    socket.on('inputChange', function (data) {
+      io.sockets.emit('inputChange_res', data)
+      console.log('inputChange :', data)
     })
 
     // get CPU info

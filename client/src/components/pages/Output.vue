@@ -46,6 +46,7 @@ export default {
   name: 'Outputs',
   data: () => {
     return {
+      stopChange: false,
       outputs: [
       { name: 'q00', i: 1, byte: 0, bit: 0, value: false, label: 'Q 8.0' },
       { name: 'q01', i: 2, byte: 0, bit: 1, value: false, label: 'Q 8.1' },
@@ -120,8 +121,10 @@ export default {
     outputs: {
       // watching if the output state changes
       handler: function (val, oldVal) {
-        this.status = this.outputs
-        this.outputChange()
+        if (!this.stopChange) {
+          this.status = this.outputs
+          this.outputChange()
+        }
       },
       deep: true
     }
@@ -158,6 +161,35 @@ export default {
   },
   beforeMount () {
     this.$socket.emit('readConfig')
+  },
+  sockets: {
+    outputChange_res (data) {
+      let outServer = JSON.parse(data)
+
+      // The for loop checks every index of the array an convert it to bits
+
+      for (let i = 0; i < outServer.length; i++) {
+        this.stopChange = true
+        // If the index is boolen "true" the bit array recieves an 1
+
+        if (outServer[i] === 1) {
+          this.outputs[i].value = true
+
+        // If the index is boolean "false" the bit array recieves an 0
+
+        } else if ((outServer[i] === 0)) {
+          this.outputs[i].value = false
+        }
+
+        // If the for loop reached the end, data is sent out
+
+        if ((outServer.length - 1) === i) {
+          console.log('recieved: ', JSON.stringify(outServer))
+          // this.outputs.value = outServer
+          this.stopChange = false
+        }
+      }
+    }
   }
 }
 </script>

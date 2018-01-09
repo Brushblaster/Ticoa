@@ -17,7 +17,7 @@ exports = module.exports = function (io) {
         .sort('-createdOn')
         .then(CommConf => {
           console.log(CommConf)
-          socket.emit('getLastConfig_res', (CommConf[0]))
+          io.sockets.emit('getLastConfig_res', (CommConf[0]))
         })
         .catch(error => console.log(error))
     })
