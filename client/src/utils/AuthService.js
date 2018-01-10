@@ -49,10 +49,8 @@ export default class AuthService {
     },
     languageDictionary: {
       title: 'Ticoa'
-    }/* ,
-    allowedConnections: [
-      'Username - Password - Authentication', 'google'
-    ] */
+    },
+    allowSignUp: false
   })
 
   // defining the Method to show the lock screen

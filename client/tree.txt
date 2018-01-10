@@ -1,0 +1,40 @@
+Auflistung der Ordnerpfade fÅr Volume Acer
+Volumeseriennummer : E2FB-149F
+C:\USERS\DENIS\DOCUMENTS\PROJECTS\TICOA\CLIENT\SRC
+|   App.vue
+|   main.js
+|   store.js
+|   
++---assets
+|       logo.png
+|       
++---components
+|   +---layouts
+|   |       Layout.vue
+|   |       
+|   \---pages
+|           Admin.vue
+|           Config.vue
+|           Home.vue
+|           Input.vue
+|           Manual.vue
+|           Output.vue
+|           Resources.vue
+|           Root.vue
+|           SPS.vue
+|           
++---config
+|       socketConfig.js
+|       
++---router
+|       index.js
+|       
++---utils
+|       auth0config.js
+|       AuthService.js
+|       
+\---vuex
+    \---modules
+        \---auth
+                store.js
+                
