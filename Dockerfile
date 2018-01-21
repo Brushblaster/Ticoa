@@ -7,7 +7,7 @@ COPY ./server/package*.json ./
 
 RUN npm install --only=production
 
-COPY ./server ./
+COPY ./server ./server
 
 EXPOSE 8080
 
